@@ -1,5 +1,8 @@
 package com.github.laysakura.requestlocaltime.controllers
 
+import java.time.OffsetDateTime
+
+import com.github.laysakura.requestlocaltime.filters.RequestLocalTime
 import com.github.laysakura.requestlocaltime.idl
 import com.github.laysakura.requestlocaltime.idl.VerboseService.Echo
 import com.google.inject.{Inject, Singleton}
@@ -14,10 +17,12 @@ class VerboseServiceController @Inject() ()
     with Logging
 {
   override val echo = handle(Echo) { args =>
-    debug(s"""debug!\n\tyou said "${args.message}"""")
-    info(s"""info!\n\tyou said "${args.message}"""")
-    warn(s"""warn!\n\tyou said "${args.message}"""")
-    error(s"""error!\n\tyou said "${args.message}"""")
+    info(s"Current time: ${OffsetDateTime.now}\tRequestLocalTime=${RequestLocalTime.current.requestedAt}")
+
+    debug("sleeping...")
+    Thread.sleep(1000)
+
+    info(s"Current time: ${OffsetDateTime.now}\tRequestLocalTime=${RequestLocalTime.current.requestedAt}")
 
     Future(s"You said: ${args.message}")
   }

@@ -1,6 +1,7 @@
 package com.github.laysakura.requestlocaltime.server
 
 import com.github.laysakura.requestlocaltime.controllers.VerboseServiceController
+import com.github.laysakura.requestlocaltime.filters.SetRequestLocalTimeFilter
 import com.github.laysakura.requestlocaltime.modules.ClientIdModule
 import com.twitter.finatra.thrift.ThriftServer
 import com.twitter.finatra.thrift
@@ -26,6 +27,7 @@ class VerboseServiceServer extends ThriftServer
       .filter[thrift.filters.ThriftMDCFilter]
       .filter[thrift.filters.AccessLoggingFilter]
       .filter[thrift.filters.StatsFilter]
+      .filter[SetRequestLocalTimeFilter]
       .add[VerboseServiceController]
   }
 }
