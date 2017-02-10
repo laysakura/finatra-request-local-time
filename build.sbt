@@ -8,6 +8,7 @@ lazy val commonSettings = Seq(
 )
 
 lazy val versions = new {
+  val logback = "1.1.7"
   val finagle = "6.40.0"
   val finatra = "2.6.0"
   val scrooge = "4.12.0"
@@ -25,6 +26,7 @@ lazy val common = (project in file("common")).
   settings(commonSettings: _*).
   settings(
     libraryDependencies ++= Seq(
+      "ch.qos.logback" % "logback-classic" % versions.logback,
       "com.twitter" %% "scrooge-core" % versions.scrooge,
       "com.twitter" %% "inject-core" % versions.finatra,
       "com.twitter" %% "inject-app" % versions.finatra,
